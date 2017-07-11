@@ -5,9 +5,13 @@
   "author": "Byron Ferguson <byron.ferguson@homecreditus.com>",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "start": "micro index"
+    "dev": "node build/dev-server.js",
+ 
+    "build": "rimraf dist && mkdirp dist && ncp static dist/static && cross-env NODE_ENV=production webpack — progress — hide-modules — config build/webpack.prod.conf.js",
+ 
+    "postinstall": "npm run build",
+ 
+    "start": "node server.js"
   },
   "dependencies": {
     "firebase": "^3.9.0",
